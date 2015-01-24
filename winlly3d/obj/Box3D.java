@@ -21,10 +21,15 @@ public class Box3D extends Object3D {
         points.add(new Point3D(points.get(0).x,         points.get(0).y - width, points.get(0).z + width));
     }
 
+    public Box3D(Point3D p, int width, Color c) {
+        this(p, width);
+        setColor(c);
+    }
+
     @Override
     public VisibleObj getViewObj() {
         try {
-            LinesObj view = new LinesObj();
+            LinesObj view = new LinesObj(color);
             Point p1 = perspectiveProjection(points.get(0));
             Point p2 = perspectiveProjection(points.get(1));
             Point p3 = perspectiveProjection(points.get(2));

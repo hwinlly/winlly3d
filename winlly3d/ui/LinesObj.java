@@ -12,11 +12,17 @@ import java.util.Iterator;
 public class LinesObj implements VisibleObj {
 
     private final ArrayList<Line2D> lines = new ArrayList<Line2D>();
+    private Color color = null;
+
+    public LinesObj(Color c) {
+        color = c;
+    }
 
     @Override
     public void paintObject(Graphics g, int w, int h) {
         w = w >> 1;
         h = h >> 1;
+        g.setColor(color);
         Iterator<Line2D> iter = lines.iterator();
         while(iter.hasNext()) {
             Line2D line = iter.next();

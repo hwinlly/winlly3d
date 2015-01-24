@@ -41,11 +41,6 @@ public class ViewPanel extends JPanel {
             world.paintWorld(g, viewWidth, viewHeight);
         }
 
-        // draw mark lines
-        g.setColor(Color.red);
-        g.drawLine(0, viewHeight >> 1, viewWidth, viewHeight >> 1);
-        g.drawLine(viewWidth >> 1, 0, viewWidth >> 1, viewHeight);
-
     }
 
 }

@@ -20,23 +20,26 @@ public final class BoxTest implements MouseListener, MouseMotionListener, MouseW
         world = new World3D(camera);
         float distance = 1000.0f;
         for(int i = 0; i < 100; i++) {
-            boxes.add(new Box3D(new Point3D(-50.0f,                     50.0f,              distance + i*150), 100));
-            boxes.add(new Box3D(new Point3D(-50.0f,                     50.0f + (i%10)*150, distance + i*150), 100));
-            boxes.add(new Box3D(new Point3D(-50.0f,                     50.0f - (i%10)*150, distance + i*150), 100));
+            boxes.add(new Box3D(new Point3D(-50.0f,                     50.0f,              distance + i*150), 100, i%2 == 0 ? Color.red : Color.black));
+            boxes.add(new Box3D(new Point3D(-50.0f,                     50.0f + (i%10)*150, distance + i*150), 100, i%2 == 0 ? Color.red : Color.black));
+            boxes.add(new Box3D(new Point3D(-50.0f,                     50.0f - (i%10)*150, distance + i*150), 100, i%2 == 0 ? Color.red : Color.black));
             if(i <= 5) {
                 continue;
             }
-            boxes.add(new Box3D(new Point3D(-50.0f + ((i + 5)%10)*150,  50.0f,              distance + i*150), 100));
-            boxes.add(new Box3D(new Point3D(-50.0f - ((i + 5)%10)*150,  50.0f,              distance + i*150), 100));
+            boxes.add(new Box3D(new Point3D(-50.0f + ((i + 5)%10)*150,  50.0f,              distance + i*150), 100, i%2 == 0 ? Color.red : Color.black));
+            boxes.add(new Box3D(new Point3D(-50.0f - ((i + 5)%10)*150,  50.0f,              distance + i*150), 100, i%2 == 0 ? Color.red : Color.black));
         }
 
         for(Box3D box : boxes) {
             world.add(box);
         }
 
-        world.add(new Line3D(new Point3D(0, 0, 0), new Point3D(0, 0, 10000)));
-        world.add(new Line3D(new Point3D(0, 0, 0), new Point3D(0, 10000, 0)));
-        world.add(new Line3D(new Point3D(0, 0, 0), new Point3D(10000, 0, 0)));
+        int gridSpace = 200;
+        for(int i = 0; i <= 50; i++) {
+            world.add(new Line3D(new Point3D(i*gridSpace, 0, 0), new Point3D(i*gridSpace, 0, 10000), Color.blue));
+            world.add(new Line3D(new Point3D(0, 0, i*gridSpace), new Point3D(10000, 0, i*gridSpace), Color.blue));
+        }
+
     }
 
     public World3D getWorld() {
@@ -87,10 +90,20 @@ public final class BoxTest implements MouseListener, MouseMotionListener, MouseW
                         moveSpeed * (oldPoint.y - currentPoint.y), 0);
                 world.moveWorld(moveP);
             }
-        } else {
-            float angle = (currentPoint.x - oldPoint.x)/400.f;
+        } else if(SwingUtilities.isRightMouseButton(e)) {
+            float rotatRate = 400.f;
+            float angleY = (currentPoint.x - oldPoint.x)/rotatRate;
+            float angleX = (currentPoint.y - oldPoint.y)/rotatRate;
             for(Box3D box : boxes) {
-                box.rotationY(angle, new Point(0, 5000));
+                box.rotationX(angleX, new Point(0, 5000));
+                box.rotationY(angleY, new Point(0, 5000));
+            }
+            world.updateView();
+        } else {
+            float rotatRate = 400.f;
+            float angleZ = (currentPoint.x - oldPoint.x)/rotatRate;
+            for(Box3D box : boxes) {
+                box.rotationZ(angleZ, new Point(0, 0));
             }
             world.updateView();
         }

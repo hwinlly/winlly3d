@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public abstract class Object3D {
 
     private World3D world = null;
+    protected Color color = Color.black;
     protected ArrayList<Point3D> points = new ArrayList<Point3D>();
 
     public void setWorld(World3D w) {
@@ -25,6 +26,10 @@ public abstract class Object3D {
     }
 
     public abstract VisibleObj getViewObj();
+
+    public void setColor(Color c) {
+        color = c;
+    }
 
     public void move(Point3D location) {
         for(Point3D p : points) {
