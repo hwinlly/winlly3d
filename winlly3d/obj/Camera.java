@@ -23,6 +23,22 @@ public class Camera {
         farFace = f;
     }
 
+    public float getNearFace() {
+        return nearFace;
+    }
+
+    public float getFarFace() {
+        return farFace;
+    }
+
+    public void setNearFace(float n) {
+        nearFace = n;
+    }
+
+    public void setFarFace(float f) {
+        farFace = f;
+    }
+
     public Point perspectiveProjection(float x, float y, float z) {
         if(z <= 0 || z >= farFace) {
             return null;

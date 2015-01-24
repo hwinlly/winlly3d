@@ -17,16 +17,17 @@ import java.awt.event.MouseMotionListener;
 public final class BoxTest implements MouseListener, MouseMotionListener {
 
     private static ViewFrame mainFrame = new ViewFrame();
-    private static Camera ca = new Camera();
+    private static Camera camera = new Camera();
     private World3D world = null;
     private Point oldPoint = null;
 
     public BoxTest() {
-        world = new World3D(ca);
+        world = new World3D(camera);
+        float distance = 1000.0f;
         for(int i = 0; i < 10; i++) {
-            world.add(new Box3D(new Point3D(-50.0f,  50.0f, 850.0f + i*150), 100));
-            world.add(new Box3D(new Point3D(-50.0f,  50.0f + i*150, 850.0f + i*150), 100));
-            world.add(new Box3D(new Point3D(-50.0f,  50.0f - i*150,850.0f + i*150), 100));
+            world.add(new Box3D(new Point3D(-50.0f,  50.0f,         distance + i*150), 100));
+            world.add(new Box3D(new Point3D(-50.0f,  50.0f + i*150, distance + i*150), 100));
+            world.add(new Box3D(new Point3D(-50.0f,  50.0f - i*150, distance + i*150), 100));
         }
     }
 

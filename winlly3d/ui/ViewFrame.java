@@ -15,7 +15,7 @@ public class ViewFrame extends JFrame {
     public ViewFrame() {
         mainPanel = new ViewPanel();
         add(mainPanel);
-        setPreferredSize(new Dimension(800,600));
+        setExtendedState(MAXIMIZED_BOTH);
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

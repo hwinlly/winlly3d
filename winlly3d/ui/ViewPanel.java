@@ -32,7 +32,7 @@ public class ViewPanel extends JPanel {
     }
 
     @Override
-    protected  void paintComponent(Graphics g)  {
+    protected void paintComponent(Graphics g)  {
         super.paintComponent(g);
         int viewWidth = getWidth();
         int viewHeight = getHeight();
