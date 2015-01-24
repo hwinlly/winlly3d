@@ -19,7 +19,7 @@ public class World3D {
         viewCamera = ca;
     }
 
-    public boolean addObj(Object3D obj) {
+    public boolean add(Object3D obj) {
         if(null == obj) {
             return false;
         }
