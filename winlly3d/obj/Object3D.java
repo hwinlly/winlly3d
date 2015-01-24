@@ -2,6 +2,8 @@ package winlly3d.obj;
 
 import winlly3d.ui.VisibleObj;
 
+import java.awt.*;
+
 /**
  * Created by winlly on 2015/1/24.
  */
@@ -12,6 +14,10 @@ public abstract class Object3D {
 
     public void setWorld(World3D w) {
         world = w;
+    }
+
+    public Point perspectiveProjection(Point3D p) {
+        return world.perspectiveProjection(p);
     }
 
     public abstract VisibleObj getViewObj();

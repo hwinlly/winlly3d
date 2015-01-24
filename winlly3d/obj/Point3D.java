@@ -14,4 +14,10 @@ public class Point3D {
         this.y = y;
         this.z = z;
     }
+
+    public void move(Point3D p) {
+        x += p.x;
+        y += p.y;
+        z += p.z;
+    }
 }

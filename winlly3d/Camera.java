@@ -23,7 +23,7 @@ public class Camera {
         farFace = f;
     }
 
-    Point PerspectiveProjection(float x, float y, float z) {
+    public Point perspectiveProjection(float x, float y, float z) {
         if(z <= 0 || z >= farFace) {
             return null;
         }
@@ -33,7 +33,7 @@ public class Camera {
         return location;
     }
 
-    Point PerspectiveProjection(Point3D p) {
-        return PerspectiveProjection(p.x, p.y, p.z);
+    public Point perspectiveProjection(Point3D p) {
+        return perspectiveProjection(p.x, p.y, p.z);
     }
 }
