@@ -40,7 +40,7 @@ public class Camera {
     }
 
     public Point perspectiveProjection(float x, float y, float z) {
-        if(z <= 0 || z >= farFace) {
+        if(z < 0 || z > farFace) {
             return null;
         }
         Point location = new Point();

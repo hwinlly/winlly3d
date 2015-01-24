@@ -1,29 +1,42 @@
 package winlly3d.test;
 
-import winlly3d.obj.Box3D;
-import winlly3d.obj.Camera;
-import winlly3d.obj.Point3D;
-import winlly3d.obj.World3D;
+import winlly3d.obj.*;
 import winlly3d.ui.ViewFrame;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
-public final class BoxTest implements MouseListener, MouseMotionListener,MouseWheelListener {
+public final class BoxTest implements MouseListener, MouseMotionListener, MouseWheelListener {
 
     private static ViewFrame mainFrame = new ViewFrame();
     private static Camera camera = new Camera();
     private World3D world = null;
     private Point oldPoint = null;
+    private ArrayList<Box3D> boxes = new ArrayList<Box3D>();
 
     public BoxTest() {
         world = new World3D(camera);
         float distance = 1000.0f;
-        for(int i = 0; i < 10; i++) {
-            world.add(new Box3D(new Point3D(-50.0f,  50.0f,         distance + i*150), 100));
-            world.add(new Box3D(new Point3D(-50.0f,  50.0f + i*150, distance + i*150), 100));
-            world.add(new Box3D(new Point3D(-50.0f,  50.0f - i*150, distance + i*150), 100));
+        for(int i = 0; i < 100; i++) {
+            boxes.add(new Box3D(new Point3D(-50.0f,                     50.0f,              distance + i*150), 100));
+            boxes.add(new Box3D(new Point3D(-50.0f,                     50.0f + (i%10)*150, distance + i*150), 100));
+            boxes.add(new Box3D(new Point3D(-50.0f,                     50.0f - (i%10)*150, distance + i*150), 100));
+            if(i <= 5) {
+                continue;
+            }
+            boxes.add(new Box3D(new Point3D(-50.0f + ((i + 5)%10)*150,  50.0f,              distance + i*150), 100));
+            boxes.add(new Box3D(new Point3D(-50.0f - ((i + 5)%10)*150,  50.0f,              distance + i*150), 100));
         }
+
+        for(Box3D box : boxes) {
+            world.add(box);
+        }
+
+        world.add(new Line3D(new Point3D(0, 0, 0), new Point3D(0, 0, 10000)));
+        world.add(new Line3D(new Point3D(0, 0, 0), new Point3D(0, 10000, 0)));
+        world.add(new Line3D(new Point3D(0, 0, 0), new Point3D(10000, 0, 0)));
     }
 
     public World3D getWorld() {
@@ -67,12 +80,21 @@ public final class BoxTest implements MouseListener, MouseMotionListener,MouseWh
     @Override
     public void mouseDragged(MouseEvent e) {
         Point currentPoint = e.getPoint();
-        int moveSpeed = 3;
-        if(null != oldPoint) {
-            Point3D moveP = new Point3D(moveSpeed * (currentPoint.x - oldPoint.x),
-                                        moveSpeed * (oldPoint.y - currentPoint.y), 0);
-            world.moveWorld(moveP);
+        if(SwingUtilities.isLeftMouseButton(e)) {
+            int moveSpeed = 3;
+            if(null != oldPoint) {
+                Point3D moveP = new Point3D(moveSpeed * (currentPoint.x - oldPoint.x),
+                        moveSpeed * (oldPoint.y - currentPoint.y), 0);
+                world.moveWorld(moveP);
+            }
+        } else {
+            float angle = (currentPoint.x - oldPoint.x)/400.f;
+            for(Box3D box : boxes) {
+                box.rotationY(angle, new Point(0, 5000));
+            }
+            world.updateView();
         }
+
         mainFrame.repaint();
         oldPoint = currentPoint;
     }

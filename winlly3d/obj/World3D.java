@@ -26,6 +26,13 @@ public class World3D {
         return true;
     }
 
+    public void updateView() {
+        viewObjs.clear();
+        for(Object3D obj : objects) {
+            viewObjs.add(obj.getViewObj());
+        }
+    }
+
     public Point perspectiveProjection(Point3D p) {
         return viewCamera.perspectiveProjection(p);
     }

@@ -3,6 +3,7 @@ package winlly3d.obj;
 import winlly3d.ui.VisibleObj;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by winlly on 2015/1/24.
@@ -10,7 +11,7 @@ import java.awt.*;
 public abstract class Object3D {
 
     private World3D world = null;
-    private Point3D center = null;
+    protected ArrayList<Point3D> points = new ArrayList<Point3D>();
 
     public void setWorld(World3D w) {
         world = w;
@@ -24,5 +25,28 @@ public abstract class Object3D {
     }
 
     public abstract VisibleObj getViewObj();
-    public abstract void move(Point3D p);
+
+    public void move(Point3D location) {
+        for(Point3D p : points) {
+            p.move(location);
+        }
+    }
+
+    public void rotationX(double a, Point location) {
+        for(Point3D p : points) {
+            p.rotationX(a, location);
+        }
+    }
+
+    public void rotationY(double a, Point location) {
+        for(Point3D p : points) {
+            p.rotationY(a, location);
+        }
+    }
+
+    public void rotationZ(double a, Point location) {
+        for(Point3D p : points) {
+            p.rotationZ(a, location);
+        }
+    }
 }
