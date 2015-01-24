@@ -4,11 +4,7 @@ import winlly3d.ui.VisibleObj;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-/**
- * Created by winlly on 2015/1/24.
- */
 public class World3D {
 
     private Camera viewCamera = null;
@@ -30,25 +26,13 @@ public class World3D {
         return true;
     }
 
-    public void updateViews() {
-        viewObjs.clear();
-        Iterator<Object3D> iter = objects.iterator();
-        while(iter.hasNext()) {
-            Object3D obj = iter.next();
-            VisibleObj viewObj = obj.getViewObj();
-            viewObjs.add(viewObj);
-        }
-    }
-
     public Point perspectiveProjection(Point3D p) {
         return viewCamera.perspectiveProjection(p);
     }
 
     public void moveWorld(Point3D p) {
         viewObjs.clear();
-        Iterator<Object3D> iter = objects.iterator();
-        while(iter.hasNext()) {
-            Object3D obj = iter.next();
+        for (Object3D obj : objects) {
             obj.move(p);
             VisibleObj viewObj = obj.getViewObj();
             viewObjs.add(viewObj);
@@ -56,10 +40,10 @@ public class World3D {
     }
 
     public void paintWorld(Graphics g, int w, int h) {
-        Iterator<VisibleObj> iter = viewObjs.iterator();
-        while(iter.hasNext()) {
-            VisibleObj obj = iter.next();
-            obj.paintObject(g, w, h);
+        for (VisibleObj obj : viewObjs) {
+            if (null != obj) {
+                obj.paintObject(g, w, h);
+            }
         }
     }
 }

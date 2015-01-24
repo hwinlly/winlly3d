@@ -7,14 +7,9 @@ import winlly3d.obj.World3D;
 import winlly3d.ui.ViewFrame;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
-/**
- * Created by winlly on 2015/1/24.
- */
-public final class BoxTest implements MouseListener, MouseMotionListener {
+public final class BoxTest implements MouseListener, MouseMotionListener,MouseWheelListener {
 
     private static ViewFrame mainFrame = new ViewFrame();
     private static Camera camera = new Camera();
@@ -40,6 +35,7 @@ public final class BoxTest implements MouseListener, MouseMotionListener {
         mainFrame.setWorld(tester.getWorld());
         mainFrame.addMouseListener(tester);
         mainFrame.addMouseMotionListener(tester);
+        mainFrame.addMouseWheelListener(tester);
         mainFrame.setVisible(true);
     }
 
@@ -84,5 +80,16 @@ public final class BoxTest implements MouseListener, MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent e) {
 
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        int moveSpeed = 30;
+        int distance = e.getWheelRotation();
+        if(distance != 0) {
+            Point3D moveP = new Point3D(0, 0, moveSpeed * distance);
+            world.moveWorld(moveP);
+        }
+        mainFrame.repaint();
     }
 }
