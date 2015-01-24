@@ -11,7 +11,7 @@ import java.awt.event.MouseMotionListener;
 /**
  * Created by winlly on 2015/1/24.
  */
-public class ViewPanel extends JPanel implements MouseListener, MouseMotionListener {
+public class ViewPanel extends JPanel {
 
     private World3D world = null;
 
@@ -48,38 +48,4 @@ public class ViewPanel extends JPanel implements MouseListener, MouseMotionListe
 
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
 }

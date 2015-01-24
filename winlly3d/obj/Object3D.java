@@ -24,4 +24,5 @@ public abstract class Object3D {
     }
 
     public abstract VisibleObj getViewObj();
+    public abstract void move(Point3D p);
 }

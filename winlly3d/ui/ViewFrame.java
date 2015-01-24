@@ -14,13 +14,11 @@ public class ViewFrame extends JFrame {
 
     public ViewFrame() {
         mainPanel = new ViewPanel();
+        add(mainPanel);
         setPreferredSize(new Dimension(800,600));
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        add(mainPanel);
-        addMouseListener(mainPanel);
-        addMouseMotionListener(mainPanel);
     }
 
     public void setWorld(World3D world) {

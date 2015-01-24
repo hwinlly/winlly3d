@@ -35,6 +35,7 @@ public class Box3D extends Object3D {
         this.d2 = d2;
     }
 
+    @Override
     public void move(Point3D p) {
         a1.move(p);
         a2.move(p);

@@ -44,6 +44,17 @@ public class World3D {
         return viewCamera.perspectiveProjection(p);
     }
 
+    public void moveWorld(Point3D p) {
+        viewObjs.clear();
+        Iterator<Object3D> iter = objects.iterator();
+        while(iter.hasNext()) {
+            Object3D obj = iter.next();
+            obj.move(p);
+            VisibleObj viewObj = obj.getViewObj();
+            viewObjs.add(viewObj);
+        }
+    }
+
     public void paintWorld(Graphics g, int w, int h) {
         Iterator<VisibleObj> iter = viewObjs.iterator();
         while(iter.hasNext()) {
