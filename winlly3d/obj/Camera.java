@@ -1,4 +1,4 @@
-package winlly3d;
+package winlly3d.obj;
 
 import winlly3d.obj.Point3D;
 

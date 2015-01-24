@@ -15,6 +15,8 @@ public class LinesObj implements VisibleObj {
 
     @Override
     public void paintObject(Graphics g, int w, int h) {
+        w = w >> 1;
+        h = h >> 1;
         Iterator<Line2D> iter = lines.iterator();
         while(iter.hasNext()) {
             Line2D line = iter.next();

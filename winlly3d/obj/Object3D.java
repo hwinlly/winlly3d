@@ -17,6 +17,9 @@ public abstract class Object3D {
     }
 
     public Point perspectiveProjection(Point3D p) {
+        if(null == world) {
+            return null;
+        }
         return world.perspectiveProjection(p);
     }
 

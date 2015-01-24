@@ -1,6 +1,5 @@
 package winlly3d.obj;
 
-import winlly3d.Camera;
 import winlly3d.ui.VisibleObj;
 
 import java.awt.*;
@@ -29,6 +28,16 @@ public class World3D {
         viewObjs.add(viewObj);
         objects.add(obj);
         return true;
+    }
+
+    public void updateViews() {
+        viewObjs.clear();
+        Iterator<Object3D> iter = objects.iterator();
+        while(iter.hasNext()) {
+            Object3D obj = iter.next();
+            VisibleObj viewObj = obj.getViewObj();
+            viewObjs.add(viewObj);
+        }
     }
 
     public Point perspectiveProjection(Point3D p) {

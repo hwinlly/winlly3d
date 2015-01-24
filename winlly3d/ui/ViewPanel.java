@@ -15,6 +15,10 @@ public class ViewPanel extends JPanel implements MouseListener, MouseMotionListe
 
     private World3D world = null;
 
+    public ViewPanel() {
+
+    }
+
     public ViewPanel(World3D w) {
         world = w;
     }
@@ -23,12 +27,19 @@ public class ViewPanel extends JPanel implements MouseListener, MouseMotionListe
         return world;
     }
 
+    public void setWorld(World3D w) {
+        world = w;
+    }
+
     @Override
     protected  void paintComponent(Graphics g)  {
         super.paintComponent(g);
         int viewWidth = getWidth();
         int viewHeight = getHeight();
-        world.paintWorld(g, viewWidth, viewHeight);
+
+        if(null != world) {
+            world.paintWorld(g, viewWidth, viewHeight);
+        }
 
         // draw mark lines
         g.setColor(Color.red);
